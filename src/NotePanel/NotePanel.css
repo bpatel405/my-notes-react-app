@@ -4,9 +4,7 @@
     margin-top: 5px;
 }
 
-.note-option :hover {
+.note-option:hover, .note-option:focus, .note-option:active, .note-option.active, .open>.dropdown-toggle.note-option {
     color: white;
-    background: black;
-    border: none;
+    background-color: #00b3db;
 }
-
