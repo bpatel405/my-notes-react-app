@@ -1,4 +1,3 @@
-import { async } from "q";
 
 class Note {
     constructor() {
@@ -8,6 +7,10 @@ class Note {
 
     save = async () => {
         
+    }
+
+    read = async () => {
+
     }
 }
 

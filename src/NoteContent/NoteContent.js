@@ -7,9 +7,15 @@ import "../test-style.css"
 
 class NoteContent extends Component {
 
-    onChangeNoteTitle = () => {
+    onChangeNoteTitle = (e) => {
         const title = this.refs.title.value;
-        this.props.handleOnChangeNoteTitle(title);
+        const maxTitleLength = 50;
+        if (title.length >= maxTitleLength) {
+            e.preventDefault();
+        }
+        else {
+            this.props.handleOnChangeNoteTitle(title);
+        }
     }
 
     onChangeNoteBody = () => {
