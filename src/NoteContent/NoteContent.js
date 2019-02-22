@@ -17,6 +17,13 @@ class NoteContent extends Component {
         this.props.handleOnChangeNoteBody(body);
     }
 
+    handleKeyPress = (e) => {
+        if (e.key === "Tab") {
+            e.preventDefault();
+            e.target.value += "    ";
+        }
+    }
+
     render() {
         let note = this.props.activeNote;
         return(
@@ -30,7 +37,7 @@ class NoteContent extends Component {
                     </div>
                 </div>
                 <div className='row note-body'>
-                    <textarea className='form-control' ref='body' placeholder='Body' value={note.Body} onChange={this.onChangeNoteBody}></textarea>
+                    <textarea className='form-control' ref='body' placeholder='Body' value={note.Body} onChange={this.onChangeNoteBody} onKeyDown={this.handleKeyPress}></textarea>
                 </div>
             </div>
         );

@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   //change current viewing note when onClick
-  handleChangeActiveNote = index => {
+  handleOnChangeActiveNote = index => {
     this.setState({
       ActiveIndex : index,
     });
@@ -74,7 +74,7 @@ class App extends Component {
       <div className = 'container-fluid app'>
         <div className = 'row'>
           <div className = 'col-md-4 col-lg-4 col-xl-4 note-panel border-right'>
-            <NotePanel NoteList={this.state.NoteList} ActiveIndex={this.state.ActiveIndex} changeActiveNote={this.handleChangeActiveNote} createNewNote={this.handleCreateNewNote}/>
+            <NotePanel NoteList={this.state.NoteList} ActiveIndex={this.state.ActiveIndex} changeActiveNote={this.handleOnChangeActiveNote} createNewNote={this.handleCreateNewNote}/>
           </div>
           <div className = 'col-md-8 col-lg-8 col-xl-8 note-content'>
             {ActiveIndex !== -1 ? <NoteContent activeNote={activeNote} handleOnChangeNoteTitle={this.handleOnChangeNoteTitle} handleOnChangeNoteBody={this.handleOnChangeNoteBody} deleteNote={this.handleDeleteNote}/> : ''}

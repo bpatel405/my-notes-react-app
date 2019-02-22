@@ -1,23 +1,13 @@
+import { async } from "q";
+
 class Note {
     constructor() {
-        this.title = "untitled note";
-        this.body = "";
+        this.Title = "untitled note";
+        this.Body = "";
     }
 
-    get Title() {
-        return this.title;
-    }
-
-    set Title(title) {
-        this.title = title;
-    }
-
-    get Body() {
-        return this.body;
-    }
-
-    set Body(body) {
-        this.body = body;
+    save = async () => {
+        
     }
 }
 
