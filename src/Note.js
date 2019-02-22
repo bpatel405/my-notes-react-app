@@ -1,6 +1,6 @@
 class Note {
     constructor() {
-        this.title = "";
+        this.title = "untitled note";
         this.body = "";
     }
 

@@ -1,7 +1,12 @@
+.note-panel {
+    overflow: auto;
+}
+
 .note-option {
     color: #61dafb;
     width: 100%;
-    margin-top: 5px;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
 }
 
 .note-option:hover, .note-option:focus, .note-option.active, .open>.dropdown-toggle.note-option {
