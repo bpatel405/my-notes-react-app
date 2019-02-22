@@ -1,0 +1,30 @@
+.note-title {
+    height: 10vh;
+    padding: 2%;
+}
+
+.note-title>input {
+    background-color: #282c34;
+    color: #00b3db;
+    font-size: 1.30em;
+    font-weight: bolder;
+}
+
+.note-title>input:focus, .note-body>textarea:focus {
+    background-color: #282c34;
+    color: white;
+}
+
+.note-title>input::placeholder, .note-body>textarea::placeholder {
+    color: rgb(192, 183, 183);
+}
+
+.note-body {
+    height: 85vh;
+    padding: 2%;
+}
+
+.note-body>textarea {
+    background-color: #282c34;
+    color: white
+}

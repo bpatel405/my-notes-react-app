@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import Note from "../Note";
-import "./NotePanel.css";
+import "./note-panel-style.css";
 
 //testing imports
 import "../test-style.css"

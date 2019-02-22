@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Note from "./Note";
-import './App.css';
+import './app-style.css';
 import NotePanel from "./NotePanel/NotePanel";
+import NoteContent from './NoteContent/NoteContent';
 
 //testing imports
 import "./test-style.css"
@@ -12,7 +13,7 @@ class App extends Component {
     super(props);
     this.state = {
       NoteList : [],
-      ViewingNote : new Note(),
+      View : new Note(),
     }
   }
 
@@ -25,7 +26,7 @@ class App extends Component {
             <NotePanel NoteList={this.state.NoteList}/>
           </div>
           <div className = 'col-md-8 col-lg-8 col-xl-8 note-content'>
-            
+            <NoteContent View={this.state.View}/>
           </div>
         </div>
       </div>
