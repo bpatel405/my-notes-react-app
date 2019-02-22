@@ -12,7 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      NoteList : [new Note(), new Note(), new Note(), new Note()],
+      NoteList : [],
       ActiveIndex : -1
     }
   }
@@ -26,22 +26,44 @@ class App extends Component {
 
   //change note title of activeNote
   handleOnChangeNoteTitle = title => {
-    const ActiveIndex = this.state.ActiveIndex;
-    if (ActiveIndex !== -1) {
+    const activeIndex = this.state.ActiveIndex;
+    if (activeIndex !== -1) {
       var notes = this.state.NoteList;
-      notes[ActiveIndex].Title = title;
+      notes[activeIndex].Title = title;
       this.setState({NoteList : notes});
     }
   }
 
   //change note body of activeNote
   handleOnChangeNoteBody = body => {
-    const ActiveIndex = this.state.ActiveIndex;
-    if (ActiveIndex !== -1) {
+    const activeIndex = this.state.ActiveIndex;
+    if (activeIndex !== -1) {
       var notes = this.state.NoteList;
-      notes[ActiveIndex].Body = body;
+      notes[activeIndex].Body = body;
       this.setState({NoteList : notes});
     }
+  }
+
+  //create new note 
+  handleCreateNewNote = () => {
+    let note = new Note();
+    let noteList = this.state.NoteList;
+    noteList.push(note);
+    this.setState({
+      NoteList : noteList,
+      ActiveIndex : noteList.length - 1
+    });
+  }
+
+  //deleteNote
+  handleDeleteNote = () => {
+    const activeIndex = this.state.ActiveIndex;
+    let noteList = this.state.NoteList;
+    delete noteList[activeIndex];
+    this.setState({
+      NoteList : noteList,
+      ActiveIndex : -1,
+    });
   }
 
   //Render App
@@ -52,10 +74,10 @@ class App extends Component {
       <div className = 'container-fluid app'>
         <div className = 'row'>
           <div className = 'col-md-4 col-lg-4 col-xl-4 note-panel border-right'>
-            <NotePanel NoteList={this.state.NoteList} ActiveIndex={this.state.ActiveIndex} changeActiveNote={this.handleChangeActiveNote}/>
+            <NotePanel NoteList={this.state.NoteList} ActiveIndex={this.state.ActiveIndex} changeActiveNote={this.handleChangeActiveNote} createNewNote={this.handleCreateNewNote}/>
           </div>
           <div className = 'col-md-8 col-lg-8 col-xl-8 note-content'>
-            {ActiveIndex !== -1 ? <NoteContent activeNote={activeNote} handleOnChangeNoteTitle={this.handleOnChangeNoteTitle} handleOnChangeNoteBody={this.handleOnChangeNoteBody}/> : ''}
+            {ActiveIndex !== -1 ? <NoteContent activeNote={activeNote} handleOnChangeNoteTitle={this.handleOnChangeNoteTitle} handleOnChangeNoteBody={this.handleOnChangeNoteBody} deleteNote={this.handleDeleteNote}/> : ''}
           </div>
         </div>
       </div>

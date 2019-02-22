@@ -1,26 +1,35 @@
-.note-title {
-    height: 10vh;
-    padding: 2%;
+.note-container {
+    height: 100%;
 }
 
-.note-title>input {
-    background-color: #282c34;
-    color: #00b3db;
+.note-title-group {
+    height: 10%;
+    padding: 2%;
     font-size: 1.30em;
     font-weight: bolder;
 }
 
-.note-title>input:focus, .note-body>textarea:focus {
+.note-title-group>input {
+    background-color: #282c34;
+    color: #00b3db;
+}
+
+.note-title-group>input:focus, .note-body>textarea:focus {
     background-color: #282c34;
     color: white;
 }
 
-.note-title>input::placeholder, .note-body>textarea::placeholder {
+.note-title-group>input::placeholder, .note-body>textarea::placeholder {
     color: rgb(192, 183, 183);
 }
 
+.delete-btn {
+    background-color: red;
+    color: white;
+}
+
 .note-body {
-    height: 85vh;
+    height: 85%;
     padding: 2%;
 }
 

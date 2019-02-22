@@ -1,5 +1,11 @@
-.note-panel {
+.panel-container {
+    padding: 1%;
+    height: 100%;
+}
+
+.note-list {
     overflow: auto;
+    height: 90%;
 }
 
 .note-option {
