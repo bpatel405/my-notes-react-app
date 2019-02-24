@@ -1,13 +1,13 @@
 {
-  "main.css": "/my-notes/static/css/main.54a3dfb7.chunk.css",
-  "main.js": "/my-notes/static/js/main.f37edb9f.chunk.js",
-  "main.js.map": "/my-notes/static/js/main.f37edb9f.chunk.js.map",
-  "runtime~main.js": "/my-notes/static/js/runtime~main.7e6c6883.js",
-  "runtime~main.js.map": "/my-notes/static/js/runtime~main.7e6c6883.js.map",
-  "static/js/2.b666df4e.chunk.js": "/my-notes/static/js/2.b666df4e.chunk.js",
-  "static/js/2.b666df4e.chunk.js.map": "/my-notes/static/js/2.b666df4e.chunk.js.map",
-  "index.html": "/my-notes/index.html",
-  "precache-manifest.2387731abd0a02c828e44ee4baa3a778.js": "/my-notes/precache-manifest.2387731abd0a02c828e44ee4baa3a778.js",
-  "service-worker.js": "/my-notes/service-worker.js",
-  "static/css/main.54a3dfb7.chunk.css.map": "/my-notes/static/css/main.54a3dfb7.chunk.css.map"
+  "main.css": "/my-notes-react-app/static/css/main.54a3dfb7.chunk.css",
+  "main.js": "/my-notes-react-app/static/js/main.f37edb9f.chunk.js",
+  "main.js.map": "/my-notes-react-app/static/js/main.f37edb9f.chunk.js.map",
+  "runtime~main.js": "/my-notes-react-app/static/js/runtime~main.2c1082ad.js",
+  "runtime~main.js.map": "/my-notes-react-app/static/js/runtime~main.2c1082ad.js.map",
+  "static/js/2.b666df4e.chunk.js": "/my-notes-react-app/static/js/2.b666df4e.chunk.js",
+  "static/js/2.b666df4e.chunk.js.map": "/my-notes-react-app/static/js/2.b666df4e.chunk.js.map",
+  "index.html": "/my-notes-react-app/index.html",
+  "precache-manifest.2b0dd3744b4576fb5410f1441dc0be46.js": "/my-notes-react-app/precache-manifest.2b0dd3744b4576fb5410f1441dc0be46.js",
+  "service-worker.js": "/my-notes-react-app/service-worker.js",
+  "static/css/main.54a3dfb7.chunk.css.map": "/my-notes-react-app/static/css/main.54a3dfb7.chunk.css.map"
 }
