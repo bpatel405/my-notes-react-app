@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Note from '../Note.js';
-import "./note-contenet-style.css";
+import "./note-content-style.css";
 
 //testing imports
 import "../test-style.css"
@@ -26,7 +26,7 @@ class NoteContent extends Component {
     handleKeyPress = (e) => {
         if (e.key === "Tab") {
             e.preventDefault();
-            e.target.value += "    ";
+            e.target.value += "\t";
         }
     }
 
