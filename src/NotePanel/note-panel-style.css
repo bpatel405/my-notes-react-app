@@ -3,9 +3,17 @@
     height: 100%;
 }
 
+.profile-initial {
+   font-size: 1.5em;
+}
+
+.profile-name {
+    color: #61dafb;
+}
+
 .note-list {
     overflow: auto;
-    height: 90%;
+    height: 75%;
 }
 
 .note-option {

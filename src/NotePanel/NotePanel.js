@@ -5,14 +5,36 @@ import "./note-panel-style.css";
 import "../test-style.css"
 
 class NotePanel extends Component {
+
+
+    getInitials = str => {
+        let arr = str.split(" ");
+        let initial = "";
+        arr.forEach(element => {
+            initial += element.charAt(0);
+        });
+        return initial;
+    }
+
     render() {
+        const userName = this.props.UserName;
+        const initial = this.getInitials(userName);
         const NoteList = this.props.NoteList;
         const activeIndex = this.props.ActiveIndex;
         const changeActiveNote = this.props.changeActiveNote;
         const createNewNote = this.props.createNewNote;
         return(
             <div className='panel-container'>
-                <button className='btn btn-light btn-block my-2' onClick={createNewNote}>Create New Note</button>
+                <div className = 'border-bottom p-1'>
+                    <div className='d-flex flex-row mb-2'>
+                        <div className="badge badge-secondary h1 profile-initial mt-2">{initial}</div>
+                        <div className='container ml-2'>
+                            <div className='row'><span className='profile-name'>{userName}</span></div>
+                            <div className='row mt-1'><button className="btn btn-danger btn-sm logout-btn" onClick={this.props.onLogout}>Logout</button></div>
+                        </div>
+                    </div>
+                </div>
+                <button className='btn btn-light btn-block my-3' onClick={createNewNote}>Create New Note</button>
                 <div className='note-list'>
                 {
                     NoteList.map((note, index) => (

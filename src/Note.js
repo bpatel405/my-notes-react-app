@@ -1,7 +1,7 @@
 
 class Note {
     constructor() {
-        this.Title = "untitled note";
+        this.Title = "New Note";
         this.Body = "";
     }
 
