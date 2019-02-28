@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Note from "./Note";
+import Note from "./classes/Note";
 import './app-style.css';
-import NotePanel from "./NotePanel/NotePanel";
-import NoteContent from './NoteContent/NoteContent';
-import FirebaseAuth from "./FirebaseAuth";
+import NotePanel from "./components/NotePanel/NotePanel";
+import NoteContent from './components/NoteContent/NoteContent';
+import FirebaseAuth from "./components/FirebaseAuth";
 import firebase from 'firebase';
-require("firebase/firestore");
+import "firebase/firestore";
 
 // Configure Firebase.
 const config = {

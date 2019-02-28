@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import "./note-panel-style.css";
 
-//testing imports
-import "../test-style.css"
-
 class NotePanel extends Component {
 
 

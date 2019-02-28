@@ -5,14 +5,6 @@ class Note {
         this.Title = "New Note";
         this.Body = "";
     }
-
-    save = async (database) => {
-        
-    }
-
-    read = async () => {
-
-    }
 }
 
 export default Note;

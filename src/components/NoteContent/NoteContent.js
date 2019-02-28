@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import Note from '../Note.js';
+import Note from '../../classes/Note.js';
 import "./note-content-style.css";
-
-//testing imports
-import "../test-style.css"
 
 class NoteContent extends Component {
 
