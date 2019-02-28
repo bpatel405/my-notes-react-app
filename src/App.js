@@ -5,6 +5,7 @@ import NotePanel from "./NotePanel/NotePanel";
 import NoteContent from './NoteContent/NoteContent';
 import FirebaseAuth from "./FirebaseAuth";
 import firebase from 'firebase';
+require("firebase/firestore");
 
 // Configure Firebase.
 const config = {
@@ -16,7 +17,7 @@ const config = {
   messagingSenderId: "761603453110"
 };
 firebase.initializeApp(config);
-var database = firebase.database();
+var db = firebase.firestore();
 
 class App extends Component {
   //App Constructor
@@ -44,8 +45,11 @@ class App extends Component {
     const activeIndex = this.state.ActiveIndex;
     if (activeIndex !== -1) {
       var notes = this.state.NoteList;
-      notes[activeIndex].Title = title;
-      this.setState({NoteList : notes});
+      db.collection('notes')
+        .doc(notes[activeIndex].Id)
+        .update({
+          NoteTitle : title
+        });
     }
   }
 
@@ -54,35 +58,36 @@ class App extends Component {
     const activeIndex = this.state.ActiveIndex;
     if (activeIndex !== -1) {
       var notes = this.state.NoteList;
-      notes[activeIndex].Body = body;
-      this.setState({NoteList : notes});
+      db.collection('notes')
+        .doc(notes[activeIndex].Id)
+        .update({
+          NoteBody : body,
+        });
     }
   }
 
   //create new note 
   handleCreateNewNote = () => {
     let note = new Note();
-    let noteList = this.state.NoteList;
-    noteList.push(note);
-    this.setState({
-      NoteList : noteList,
-      ActiveIndex : noteList.length - 1
+    db.collection("notes").add({
+      NoteTitle: note.Title,
+      NoteBody: note.Body,
+      Uid: this.state.Uid,
     });
   }
 
   //deleteNote
   handleDeleteNote = () => {
-    const activeIndex = this.state.ActiveIndex;
-    let noteList = this.state.NoteList;
-    delete noteList[activeIndex];
-    this.setState({
-      NoteList : noteList,
-      ActiveIndex : -1,
-    });
+    let notes = this.state.NoteList;
+    let activeIndex = this.state.ActiveIndex;
+    db.collection("notes").doc(notes[activeIndex].Id).delete();
   }
 
+  //change state and save info in local storage
   logInUser = user => {
     this.setState({
+      NoteList: [],
+      activeIndex: -1,
       DisplayName: user.displayName,
       Uid: user.uid,
     }, () => {
@@ -91,8 +96,11 @@ class App extends Component {
     })
   }
 
+  //change state and reset info in local storage
   logoutUser = () => {
     this.setState({
+      NoteList : [],
+      activeIndex : -1,
       DisplayName: '',
       Uid: '',
     }, () => {
@@ -101,14 +109,70 @@ class App extends Component {
     })
   }
 
+  //add new note to state if new note added to db
+  onNewNoteAdd = (data, id) => {
+    let note = new Note();
+    note.Title = data.NoteTitle;
+    note.Body = data.NoteBody;
+    note.Id = id;
+    let noteList = this.state.NoteList;
+    noteList.push(note);
+    this.setState({
+      NoteList : noteList,
+    });
+  }
+
+  //modify note from state if modification noted on db
+  onNoteModified = (data, id) => {
+    let notes = this.state.NoteList;
+    let index = notes.findIndex(aNote => aNote.Id === id);
+    notes[index].Title = data.NoteTitle;
+    notes[index].Body = data.NoteBody;
+    this.setState({
+      NoteList : notes,
+    });
+  }
+
+  //delete note from state if note deleted from db
+  onNoteDeleted = (id) => {
+    let notes = this.state.NoteList;
+    notes = notes.filter(aNote => aNote.Id !== id);
+    this.setState({
+      NoteList: notes,
+      ActiveIndex: -1
+    });
+  }
+
+  //set listner for data changes
+  dataListener = () => {
+    this.unsubscribe = db.collection('notes')
+      .where("Uid", "==", this.state.Uid)
+      .onSnapshot((snapShot) => {
+        snapShot.docChanges().forEach((change) => {
+          if (change.type === 'added') {
+            this.onNewNoteAdd(change.doc.data(), change.doc.id);
+          }
+          if (change.type === 'modified') {
+            this.onNoteModified(change.doc.data(), change.doc.id);
+          }
+          if (change.type === 'removed') {
+            this.onNoteDeleted(change.doc.id);
+          }
+        });
+      });
+  }
+
   componentDidMount = () => {
+    //check if auth state changes
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
         user => {
           if (user !== null) {
             this.logInUser(user);
+            this.dataListener();
           }
           else {
             this.logoutUser();
+            this.unsubscribe();
           }
         }
     );
