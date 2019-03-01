@@ -40,7 +40,9 @@ class NoteContent extends Component {
                     </div>
                 </div>
                 <div className='row note-body'>
-                    <textarea className='form-control' ref='body' placeholder='Body' value={note.Body} onChange={this.onChangeNoteBody} onKeyDown={this.handleKeyPress}></textarea>
+                    <textarea className='form-control' ref='body' placeholder='Body'
+                        autoCapitalize='off' autoCorrect='off' spellCheck='false'  autoComplete='off'
+                         value={note.Body} onChange={this.onChangeNoteBody} onKeyDown={this.handleKeyPress}></textarea>
                 </div>
             </div>
         );
