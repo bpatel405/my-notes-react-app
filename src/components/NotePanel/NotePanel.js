@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "./note-panel-style.css";
+import Loader from 'react-loader-spinner';
 
 class NotePanel extends Component {
 
@@ -20,6 +21,7 @@ class NotePanel extends Component {
         const activeIndex = this.props.ActiveIndex;
         const changeActiveNote = this.props.changeActiveNote;
         const createNewNote = this.props.createNewNote;
+        const fetchingNoteList = this.props.FetchingNoteList;
         return(
             <div className='panel-container'>
                 <div className = 'border-bottom p-1'>
@@ -34,6 +36,9 @@ class NotePanel extends Component {
                 <button className='btn btn-light btn-block my-3' onClick={createNewNote}>Create New Note</button>
                 <div className='note-list'>
                 {
+                    fetchingNoteList ?
+                    <div className='d-flex justify-content-center'><Loader type='Oval' color='#00BFFF' height='100' width='100'/></div>
+                    :
                     NoteList.map((note, index) => (
                         <button className = {activeIndex === index ? 'border btn note-option active' : 'border btn note-option'} key = {index} onClick={() => changeActiveNote(index)}>
                              {note.Title}
@@ -51,6 +56,7 @@ NotePanel.defaultProps = {
     ActiveIndex: -1,
     changeActiveNote: console.log,
     createNewNote: console.log,
+    FetchingNoteList : false,
 }
 
 export default NotePanel;

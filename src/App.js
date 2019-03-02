@@ -16,7 +16,8 @@ class App extends Component {
       Uid : uid,
       DisplayName : displayName,
       NoteList : [],
-      ActiveIndex : -1
+      ActiveIndex : -1,
+      FetchingNoteList : true,
     }
   }
 
@@ -31,12 +32,13 @@ class App extends Component {
   handleOnChangeNoteTitle = title => {
     const activeIndex = this.state.ActiveIndex;
     if (activeIndex !== -1) {
-      var notes = this.state.NoteList;
-      db.collection('notes')
+      let notes = this.state.NoteList;
+      let dbUpdater = db.collection('notes')
         .doc(notes[activeIndex].Id)
         .update({
           NoteTitle : title
         });
+        dbUpdater.then().catch(dbUpdater);
     }
   }
 
@@ -44,30 +46,33 @@ class App extends Component {
   handleOnChangeNoteBody = body => {
     const activeIndex = this.state.ActiveIndex;
     if (activeIndex !== -1) {
-      var notes = this.state.NoteList;
-      db.collection('notes')
+      let notes = this.state.NoteList;
+      let dbUpdater = db.collection('notes')
         .doc(notes[activeIndex].Id)
         .update({
           NoteBody : body,
         });
+        dbUpdater.then().catch(dbUpdater);
     }
   }
 
   //create new note 
   handleCreateNewNote = () => {
     let note = new Note();
-    db.collection("notes").add({
+    let dbUpdater = db.collection("notes").add({
       NoteTitle: note.Title,
       NoteBody: note.Body,
       Uid: this.state.Uid,
     });
+    dbUpdater.then().catch(dbUpdater);
   }
 
   //deleteNote
   handleDeleteNote = () => {
     let notes = this.state.NoteList;
     let activeIndex = this.state.ActiveIndex;
-    db.collection("notes").doc(notes[activeIndex].Id).delete();
+    let dbUpdater = db.collection("notes").doc(notes[activeIndex].Id).delete();
+    dbUpdater.then().catch(dbUpdater);
   }
 
   //change state and save info in local storage
@@ -134,19 +139,23 @@ class App extends Component {
   dataListener = () => {
     this.unsubscribe = db.collection('notes')
       .where("Uid", "==", this.state.Uid)
-      .onSnapshot((snapShot) => {
-        snapShot.docChanges().forEach((change) => {
-          if (change.type === 'added') {
-            this.onNewNoteAdd(change.doc.data(), change.doc.id);
-          }
-          if (change.type === 'modified') {
-            this.onNoteModified(change.doc.data(), change.doc.id);
-          }
-          if (change.type === 'removed') {
-            this.onNoteDeleted(change.doc.id);
-          }
+        .onSnapshot((snapShot) => {
+          snapShot.docChanges().forEach((change) => {
+            if (change.type === 'added') {
+              this.onNewNoteAdd(change.doc.data(), change.doc.id);
+            }
+            if (change.type === 'modified') {
+              this.onNoteModified(change.doc.data(), change.doc.id);
+            }
+            if (change.type === 'removed') {
+              this.onNoteDeleted(change.doc.id);
+            }
+          });
+          //turn off loader
+          this.setState({
+            FetchingNoteList: false,
+          });
         });
-      });
   }
 
   componentDidMount = () => {
@@ -176,6 +185,7 @@ class App extends Component {
     const uid = this.state.Uid;
     const userName = this.state.DisplayName;
     const noteList = this.state.NoteList;
+    const fetchingNoteList = this.state.FetchingNoteList;
     return (
       <div className = 'container-fluid app'>
         { (uid === "")
@@ -183,7 +193,7 @@ class App extends Component {
           :
           <div className = 'row'>
             <div className = 'col-md-4 col-lg-4 col-xl-4 note-panel border-right'>
-              <NotePanel UserName={userName} NoteList={noteList} ActiveIndex={activeIndex} changeActiveNote={this.handleOnChangeActiveNote} createNewNote={this.handleCreateNewNote} onLogout={() => firebase.auth().signOut()}/>
+              <NotePanel UserName={userName} NoteList={noteList} ActiveIndex={activeIndex} FetchingNoteList={fetchingNoteList} changeActiveNote={this.handleOnChangeActiveNote} createNewNote={this.handleCreateNewNote} onLogout={() => firebase.auth().signOut()}/>
             </div>
             <div className = 'col-md-8 col-lg-8 col-xl-8 note-content'>
               {activeIndex !== -1 ? <NoteContent activeNote={activeNote} handleOnChangeNoteTitle={this.handleOnChangeNoteTitle} handleOnChangeNoteBody={this.handleOnChangeNoteBody} deleteNote={this.handleDeleteNote}/> : ''}
