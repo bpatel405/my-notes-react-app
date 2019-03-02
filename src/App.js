@@ -168,14 +168,18 @@ class App extends Component {
           }
           else {
             this.logoutUser();
-            this.unsubscribe();
+            if (this.unsubscribe) {
+              this.unsubscribe();
+            }
           }
         }
     );
   }
 
   componentWillUnmount = () => {
-    this.unregisterAuthObserver();
+    if (this.unregisterAuthObserver) {
+      this.unregisterAuthObserver();
+    }
   }
 
   //Render App
@@ -185,12 +189,17 @@ class App extends Component {
     const uid = this.state.Uid;
     const userName = this.state.DisplayName;
     const noteList = this.state.NoteList;
-    const fetchingNoteList = this.state.FetchingNoteList;
+    let fetchingNoteList = this.state.FetchingNoteList;
+    let modalShow = false;
+    //if user logout
+    if (uid === "") {
+      modalShow = true;
+      fetchingNoteList = false;
+    }
     return (
       <div className = 'container-fluid app'>
-        { (uid === "")
-          ? <FirebaseAuth firebase={firebase} />
-          :
+        <FirebaseAuth firebase={firebase} show={modalShow}/>
+        { 
           <div className = 'row'>
             <div className = 'col-md-4 col-lg-4 col-xl-4 note-panel border-right'>
               <NotePanel UserName={userName} NoteList={noteList} ActiveIndex={activeIndex} FetchingNoteList={fetchingNoteList} changeActiveNote={this.handleOnChangeActiveNote} createNewNote={this.handleCreateNewNote} onLogout={() => firebase.auth().signOut()}/>

@@ -38,12 +38,12 @@ class NotePanel extends Component {
                     </div>
                 </div>
                 <button className='btn btn-light btn-block my-3' onClick={createNewNote}>Create New Note</button>
-                <div class="card text-white">
-                    <h5 class="card-header border-bottom bg-info text-center">Saved Notes</h5>
+                <div className="card text-white">
+                    <h5 className="card-header border-bottom bg-info text-center">Saved Notes</h5>
                     <div className='note-list card-body p-2' id='hide-list'>
                     {
                         fetchingNoteList ?
-                        <div className='d-flex justify-content-center'><Loader type='Oval' color='#00BFFF' height='100' width='100'/></div>
+                        <div className='d-flex justify-content-center m-5'><Loader type='Oval' color='#00BFFF' height='100' width='100'/></div>
                         :
                         NoteList.map((note, index) => (
                             <button className = {activeIndex === index ? 'border btn note-option active' : 'border btn note-option'} key = {index} onClick={() => changeActiveNote(index)}>
