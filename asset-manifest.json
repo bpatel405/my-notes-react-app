@@ -1,13 +1,15 @@
 {
   "main.css": "/my-notes-react-app/static/css/main.fb57fbf3.chunk.css",
-  "main.js": "/my-notes-react-app/static/js/main.69ca2247.chunk.js",
-  "main.js.map": "/my-notes-react-app/static/js/main.69ca2247.chunk.js.map",
+  "main.js": "/my-notes-react-app/static/js/main.ee77f927.chunk.js",
+  "main.js.map": "/my-notes-react-app/static/js/main.ee77f927.chunk.js.map",
   "runtime~main.js": "/my-notes-react-app/static/js/runtime~main.2c1082ad.js",
   "runtime~main.js.map": "/my-notes-react-app/static/js/runtime~main.2c1082ad.js.map",
-  "static/js/2.dba29119.chunk.js": "/my-notes-react-app/static/js/2.dba29119.chunk.js",
-  "static/js/2.dba29119.chunk.js.map": "/my-notes-react-app/static/js/2.dba29119.chunk.js.map",
+  "static/css/2.ee80d9c3.chunk.css": "/my-notes-react-app/static/css/2.ee80d9c3.chunk.css",
+  "static/js/2.e0cfb1aa.chunk.js": "/my-notes-react-app/static/js/2.e0cfb1aa.chunk.js",
+  "static/js/2.e0cfb1aa.chunk.js.map": "/my-notes-react-app/static/js/2.e0cfb1aa.chunk.js.map",
   "index.html": "/my-notes-react-app/index.html",
-  "precache-manifest.e23ff97dc1c4fe27ef4a618daa6e0765.js": "/my-notes-react-app/precache-manifest.e23ff97dc1c4fe27ef4a618daa6e0765.js",
+  "precache-manifest.cf9fb3fb0b8af2c10fa0fb32392f4f3b.js": "/my-notes-react-app/precache-manifest.cf9fb3fb0b8af2c10fa0fb32392f4f3b.js",
   "service-worker.js": "/my-notes-react-app/service-worker.js",
+  "static/css/2.ee80d9c3.chunk.css.map": "/my-notes-react-app/static/css/2.ee80d9c3.chunk.css.map",
   "static/css/main.fb57fbf3.chunk.css.map": "/my-notes-react-app/static/css/main.fb57fbf3.chunk.css.map"
 }
